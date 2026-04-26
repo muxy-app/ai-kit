@@ -1,19 +1,16 @@
 ---
-description: Plan, implement, and verify a feature end-to-end. Stops at "ready to commit". Asks clarifying questions only during planning, only via AskUserQuestion.
+description: Plan, implement, and verify a feature.
 ---
 
-Delegate this request to the `orchestrator` agent.
+## Steps
 
-Request: $ARGUMENTS
+1. Plan the requested feature by considering the rules in the CLAUDE.md
+2. Ask question if needed to finalize the plan only using the question tool
+3. Implement the plan by sticking to the rules of the CLAUDE.md in a way that if I ask another agent for review, We don't get required changes.
+4. When finished, Share guides with the user what to test
+5. When confirmed the feature working, Share a PR title and very short PR description
 
-Hand the orchestrator the request verbatim. It will:
-1. Plan (asking questions via AskUserQuestion only if genuinely ambiguous)
-2. Delegate to specialists in parallel
-3. Verify (build + tests, plus UI verification if visible)
-4. Output: files changed, tests, draft PR title (imperative, no prefix), 1-3 line PR body, recording path if any
+## Guides
 
-Do not commit or push. The user does that.
-
-Communication contract (enforce strictly):
-- **All user-facing questions MUST use the AskUserQuestion tool.** No exceptions, no prose questions, no "Confirm or adjust" trailers, no numbered-options lists in text. If a specialist agent surfaces ambiguity (returns "BLOCKED: …"), the orchestrator must immediately call AskUserQuestion to resolve it before resuming.
-- Terse. One-line updates only at meaningful moments.
+- Keep the communication to the user as short as possible with less reads
+- Use question tool if you need to ask questions

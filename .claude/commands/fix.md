@@ -1,19 +1,16 @@
 ---
-description: Fast path for small fixes (<50 LOC, single concern). Skips planning, goes straight to implement + verify.
+description: Fix the given issue
 ---
 
-Delegate this fix to the `orchestrator` agent with the `quick` flag — skip planning unless the fix turns out to be larger than expected.
+## Steps
 
-Request: $ARGUMENTS
+1. Understand the issue completely
+2. Ask question if needed to clarify if something is not clear
+3. Apply the fix by sticking to the rules of the CLAUDE.md in a way that if I ask another agent for review, We don't get required changes.
+4. When finished, Share guides with the user what to test
+5. When confirmed the fix working, Share a PR title and very short PR description
 
-Orchestrator workflow for /fix:
-1. Locate the issue (max 3 file reads).
-2. Patch directly via the right specialist.
-3. Verify with `build-verifier`.
-4. Output: files changed, tests added (or "none — fix too small"), one-line PR title.
+## Guides
 
-If the fix turns out to need >50 LOC or touches multiple clusters, escalate to /ship's full flow and tell the user.
-
-Communication: any user-facing question MUST go through AskUserQuestion. Never ask in prose. Terse output.
-
-Do not commit or push.
+- Keep the communication to the user as short as possible with less reads
+- Use question tool if you need to ask questions
